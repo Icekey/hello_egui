@@ -1,5 +1,5 @@
 use eframe::{egui, NativeOptions};
-use egui::{CentralPanel, Rect, Scene};
+use egui::{CentralPanel, CollapsingHeader, Rect, Scene};
 use egui_dnd::dnd;
 
 pub fn main() -> eframe::Result<()> {
@@ -12,8 +12,7 @@ pub fn main() -> eframe::Result<()> {
         NativeOptions::default(),
         move |ctx, _frame| {
             CentralPanel::default().show(ctx, |ui| {
-                Scene::new().show(ui, &mut rect, |ui| {
-                    dnd(ui, "dnd_example").show_vec(&mut items, |ui, item, handle, state| {
+                    dnd(ui, "dnd_example").with_animation_time(1.0).show_vec(&mut items, |ui, item, handle, state| {
                         ui.horizontal(|ui| {
                             handle.ui(ui, |ui| {
                                 if state.dragged {
@@ -22,9 +21,18 @@ pub fn main() -> eframe::Result<()> {
                                     ui.label("drag");
                                 }
                             });
-                            ui.label(*item);
+
+                            CollapsingHeader::new(format!("OCR Pipeline Config {}",  item)).show_unindented(ui, |ui| {
+                                if state.dragged {
+                                    dbg!("dragging");
+                                }
+                                ui.label(*item);
+                                ui.label(*item);
+                                ui.label(*item);
+                                ui.label(*item);
+                                ui.label(*item);
+                            });
                         });
-                    });
                 });
             });
         },

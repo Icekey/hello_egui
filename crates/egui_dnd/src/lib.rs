@@ -2,7 +2,7 @@
 #![forbid(unsafe_code)]
 #![warn(missing_docs)]
 
-use egui::{Id, Ui};
+use egui::{Id, Ui, UiBuilder};
 pub use state::{DragDropConfig, DragDropItem, DragDropResponse, DragUpdate, Handle};
 
 pub use crate::item_iterator::ItemIterator;
@@ -142,7 +142,16 @@ impl<'a> Dnd<'a> {
             drag_drop_ui.ui(ui, |ui, iter| {
                 items.enumerate().for_each(|(i, item)| {
                     iter.next(ui, item.id(), i, true, |ui, item_handle| {
-                        item_handle.ui(ui, |ui, handle, state| item_ui(ui, item, handle, state))
+                        item_handle.ui(ui, |ui, handle, state| {
+                            ui.scope_builder(
+                                UiBuilder::new()
+                                    .global_scope(true)
+                                    .id_salt(Id::new("UiBuilder").with(item.id())),
+                                |ui| {
+                                    item_ui(ui, item, handle, state);
+                                },
+                            );
+                        })
                     });
                 });
             })

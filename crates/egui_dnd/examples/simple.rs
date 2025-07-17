@@ -1,11 +1,9 @@
 use eframe::{egui, NativeOptions};
-use egui::{CentralPanel, CollapsingHeader, Rect, Scene};
+use egui::{CentralPanel, CollapsingHeader, UiBuilder};
 use egui_dnd::dnd;
 
 pub fn main() -> eframe::Result<()> {
     let mut items = vec!["alfred", "bernhard", "christian"];
-
-    let mut rect = Rect::ZERO;
 
     eframe::run_simple_native(
         "DnD Simple Example",
@@ -22,15 +20,14 @@ pub fn main() -> eframe::Result<()> {
                                 }
                             });
 
-                            CollapsingHeader::new(format!("OCR Pipeline Config {}",  item)).show_unindented(ui, |ui| {
-                                if state.dragged {
-                                    dbg!("dragging");
-                                }
-                                ui.label(*item);
-                                ui.label(*item);
-                                ui.label(*item);
-                                ui.label(*item);
-                                ui.label(*item);
+                            ui.scope_builder(UiBuilder::new().fixed_id(true).id_salt(format!("UiBuilder {item}")),|ui|{
+                                CollapsingHeader::new(format!("TEST CollapsingHeader {}", item)).show_unindented(ui, |ui| {
+                                    ui.label(*item);
+                                    ui.label(*item);
+                                    ui.label(*item);
+                                    ui.label(*item);
+                                    ui.label(*item);
+                                });
                             });
                         });
                 });

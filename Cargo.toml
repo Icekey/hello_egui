@@ -135,10 +135,10 @@ doc_markdown = { level = "allow", priority = 21 }
 #winit = { path = "../winit" }
 
 
-# egui = { git = "https://github.com/emilk/egui", branch = "main" }
-# eframe = { git = "https://github.com/emilk/egui", branch = "main" }
-# egui_extras = { git = "https://github.com/emilk/egui", branch = "main" }
-# egui_glow = { git = "https://github.com/emilk/egui", branch = "main" }
-# egui_kittest = { git = "https://github.com/emilk/egui", branch = "main" }
+ egui = { git = "https://github.com/Icekey/egui", branch = "fixid" }
+ eframe = { git = "https://github.com/Icekey/egui", branch = "fixid" }
+ egui_extras = { git = "https://github.com/Icekey/egui", branch = "fixid" }
+ egui_glow = { git = "https://github.com/Icekey/egui", branch = "fixid" }
+ egui_kittest = { git = "https://github.com/Icekey/egui", branch = "fixid" }
 # egui_demo_lib = { git = "https://github.com/emilk/egui", branch = "main" }
 # egui_commonmark = { git = "https://github.com/lucasmerlin/egui_commonmark", branch = "egui-update" }
